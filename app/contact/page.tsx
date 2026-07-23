@@ -17,7 +17,7 @@ export default function Profile() {
     <h3 className="text-xl font-bold text-slate-800 dark:text-white">Patipat Biw</h3>
     <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">IT Developer</p>
     <p className="text-sm text-slate-500 dark:text-slate-400 text-center mt-3">
-      ศึกษาที่มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก เขตจักรพงษภูวนารถ  งานอดิเรก ดูดวง,ฟังเพลง ชื่นชอบเกี่ยวกับ IT IOT ซอฟต์แวร์ ฮาร์ดแวร์
+      ศึกษาที่มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก เขตจักรพงษภูวนารถ  งานอดิเรก ดูดวง,ฟังเพลง ชื่นชอบเกี่ยวกับ IT ซอฟต์แวร์ ฮาร์ดแวร์
     </p>
 
     <div className="mt-6 flex gap-3">
