@@ -1,25 +1,41 @@
 "use client"
 
-import { useState } from "react"
+import { useState,useEffect } from "react"
 
-export default function ToDoFrom({ addTask }){
+export default function ToDoFrom({ addTask,editingTask,updateTask,resetEditingTask }){
 
     const [title,setTitle] = useState('');
     const [taskStatus,setTaskStatus] = useState(false);
+
+    useEffect(()=>{
+    
+      if(editingTask){
+        const {title,status} = editingTask;
+        setTitle(title)
+        setTaskStatus(status)
+      }else{
+        setTitle('');
+        setTaskStatus(false);
+      }
+    },[editingTask]);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if(!title.trim()) return;
-
-        addTask(title,taskStatus);
-
-        handleCancel();
+        if(editingTask){
+          updateTask(editingTask.id,title,taskStatus);
+        }else{
+          addTask(title,taskStatus);
+        }
+        handleCancel;
     }
 
     const handleCancel = (e) => {
         setTitle('');
         setTaskStatus(false);
+        resetEditingTask();
     }
     return (
          <form onSubmit={handleSubmit}>
@@ -48,7 +64,8 @@ export default function ToDoFrom({ addTask }){
         </div>
         <div className="flex mt-4 gap-2 justify-center">
           <button className="bg-blue-600 text-white px-4 py-1 rounded">
-            Add new task
+            {editingTask ? 'update task' : 'Add new task'}
+            
           </button>
           <button className="bg-gray-600 text-white px-4 rounded" onClick={handleCancel}>
             Cancel

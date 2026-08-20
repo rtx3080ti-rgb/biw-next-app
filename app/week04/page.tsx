@@ -16,6 +16,9 @@ export default function ToDoList() {
     const [status, setStatus] = useState(null);
     const [open, setOpen] = useState(false);
     const [selected, setSelectedTask] = useState(null);
+    const [editingtask,setEditingTask] = useState(null)
+
+    const reseteditingTask = () => setEditingTask(null);
 
     const fillteredTasks =
         status == null
@@ -43,12 +46,30 @@ export default function ToDoList() {
     };
 
     const onEdit = (t) => {
-        alert(`งานที่คุณต้องการแก้ไข ${t}`);
+        //alert(`งานที่คุณต้องการแก้ไข ${t}`);
+        setEditingTask(t);
     };
 
     const onDelete = (id) => {
-        alert(`คุณต้องการลบข้อมูล รหัสงาน ${id}?`);
+        //alert(`คุณต้องการลบข้อมูล รหัสงาน ${id}?`);
+        const updateTasks = tasks.filter(
+            item => item.id != id
+        );
+        setTasks(updateTasks);
     };
+
+    const updateTask = (id,title,status) => {
+        setTasks(
+            tasks => tasks.map(
+                t =>t.id === id ?
+             {   ...t,
+                title: title,
+                status: status
+             }  :t
+
+            ) );
+            setEditingTask(null);
+    }
 
     const tmpTdl = fillteredTasks.map((item, index) => {
 
@@ -153,7 +174,12 @@ export default function ToDoList() {
 
                 {/* Form */}
                 <div className="w-full max-w-7xl mx-auto mb-8">
-                    <ToDoFrom addTask={addTask} />
+                    <ToDoFrom 
+                    addTask={addTask}
+                    editingTask={editingtask}
+                    updateTask={updateTask}
+                    resetEditingTask={reseteditingTask}
+                     />
                 </div>
 
                 {/* จำนวนงาน + Filter */}
