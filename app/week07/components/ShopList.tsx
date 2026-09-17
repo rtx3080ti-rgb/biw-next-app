@@ -4,12 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function ShopList({data}){
-
+//alert(data);
     const [keyword,setKeyword] = useState("");
     const filterShops = data.filter(
         (item) => {
             const searchText = keyword.toLowerCase();
-            return item.title.toLowerCase().includes(searchText)
+            return item.shopName.toLowerCase().includes(searchText)
         }
 
     );
@@ -44,12 +44,12 @@ export default function ShopList({data}){
             <div className="space-y-4">
                 {
                     filterShops.map(shop => (
-                        <div key={shop.id} className="border rounded-lg p-4">
+                        <div key={shop.shopId} className="border rounded-lg p-4">
                             <h2 className="forn-semibold">
-                                {shop.title}
+                                {shop.shopName}
                             </h2>
-                            <p>Open Status: {Status(shop.openStatus)} </p>
-                            <Link href={`/week07/${shop.id}`} className="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">
+                            <p>Open Status: {Status(shop.shopStatus)} </p>
+                            <Link href={`/week07/${shop.shopId}`} className="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">
                             View Detail
                             </Link>
                         </div>
